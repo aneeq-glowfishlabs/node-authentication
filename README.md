@@ -1,8 +1,8 @@
-# NodeJS-Express-Sequalize-JWT
+# Node-Authentication
 
-> NodeJS Express REST API with JWT Authentication and support for MySQL and PostgreSQL with Sequalize.
+> NodeJS Express REST API with Firebase Authentication and support for MySQL with Sequalize.
 
-- Authentication via [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken);
+- Authentication via Firebase
 
 - Environments for `development` and `production`
 
@@ -51,12 +51,4 @@ Configure the keys with your credentials in `.env` file.
   DB_USER=root
   DB_PASSWORD=root
   DB_PORT=3609
-```
-
-#### JWT
-
-Set random `secret key` for your access tokens.
-
-```
-JWT_PRIVATE_KEY=<any random string>
 ```
