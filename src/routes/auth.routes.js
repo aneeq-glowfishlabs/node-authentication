@@ -64,6 +64,32 @@ routes.post(
  *              in: formData
  *              required: true
  *              type: string
+ *            - name: firstName
+ *              description: User's First Name
+ *              in: formData
+ *              required: true
+ *              type: string
+ *            - name: lastName
+ *              description: User's Last Name
+ *              in: formData
+ *              required: true
+ *              type: string
+ *            - name: phone
+ *              description: User's Phone Number
+ *              in: formData
+ *              required: true
+ *              type: string
+ *            - name: gender
+ *              description: User's Gender
+ *              in: formData
+ *              required: true
+ *              type: string
+ *              enum: [Male, Female, Other]
+ *            - name: age
+ *              description: User's Age
+ *              in: formData
+ *              required: true
+ *              type: integer
  *          responses:
  *              200:
  *                  description: A successful response
