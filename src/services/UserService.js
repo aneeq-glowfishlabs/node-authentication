@@ -4,9 +4,9 @@ class UserService {
   }
   getProfile = async (userId) => {
     try {
-        return await this._db.profile.findOne({
-            where: { UserId: userId },
-          });
+      return await this._db.profile.findOne({
+        where: { UserId: userId },
+      });
     } catch (error) {
       throw {
         status: 500,
@@ -19,7 +19,10 @@ class UserService {
       var update = await this._db.profile.update(updateJsonObject, {
         where: { UserId: userId },
       });
-      return updateJsonObject;
+
+      return this._db.profile.findOne({
+        where: { UserId: userId },
+      });
     } catch (error) {
       throw {
         status: 500,

@@ -14,10 +14,10 @@ class UserController {
     };
     updateProfile = async (req, res, next) => {
       var updateJsonObject = {
-        firstName: req.body.firstName? req.body.firstName: null,
-        lastName: req.body.lastName? req.body.lastName: null,
-        gender: req.body.gender? req.body.gender: null,
-        age: req.body.age? req.body.age: null
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        gender: req.body.gender,
+        age: req.body.age
       }
       this._userService
           .updateProfile(updateJsonObject,req.currentUser.id)

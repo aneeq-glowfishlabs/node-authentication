@@ -7,6 +7,9 @@ const userController = new UserController(userService);
 var routes = require("express").Router();
 
 
+const UserValidator = require("../validators/UserValidator");
+const userValidator = new UserValidator();
+const validate = require("../middlewares/validate.middleware");
 const authorize = require("../middlewares/authorize.middleware");
 
 /**
@@ -39,7 +42,7 @@ const authorize = require("../middlewares/authorize.middleware");
  *              401:
  *                  description: Authentication failed
  *              500:
- *                  description: Some error occurred while logging in.
+ *                  description: Internal Server error
  */
 routes.get(
   "/profile",
@@ -58,22 +61,22 @@ routes.get(
  *          parameters:
  *            - name: firstName
  *              description: First Name of the user 
- *              in: path
+ *              in: formData
  *              required: true
  *              type: string
  *            - name: lastName
  *              description: Last Name of the user 
- *              in: path
+ *              in: formData
  *              required: true
  *              type: string
  *            - name: age
  *              description: Age of the user 
- *              in: path
+ *              in: formData
  *              required: true
  *              type: integer
  *            - name: gender
  *              description: Gender of the user 
- *              in: path
+ *              in: formData
  *              required: true
  *              type: string
  *              enum: [Male, Female, Other]
@@ -82,12 +85,14 @@ routes.get(
  *                  description: A successful response
  *              401:
  *                  description: Authentication failed
+ *              422:
+ *                  description: Unprocessable Entity
  *              500:
- *                  description: Some error occurred while logging in.
+ *                  description: Internal Server error
  */
  routes.post(
   "/profile",
-  authorize(),
+  [authorize(),validate(userValidator.updateProfileSchema)],
   userController.updateProfile
 );
 
