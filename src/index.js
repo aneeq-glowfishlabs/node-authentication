@@ -22,7 +22,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Swagger 
 const db = require("./models");
 
 //db.sequelize.sync({ force: true });
-db.sequelize.sync({ alter: true }).then(() => {
+db.sequelize.sync().then(() => {
   console.log("Drop and re-sync db.");
 });
 

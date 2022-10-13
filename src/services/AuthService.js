@@ -7,7 +7,7 @@ class AuthService {
     this._db = db;
   }
 
-  signup = async (email, password) => {
+  signup = async (email, password,firstName, lastName, phone, gender, age) => {
     
     try {
       const userResponse = await admin.auth().createUser({
@@ -17,15 +17,26 @@ class AuthService {
         disabled: false,
       });
 
-      return await this._db.user.create({
+      var userInstance = await this._db.user.create({
         id: uuidv4(),
         email: email,
-        firebaseUid: userResponse.uid
+        firebaseUid: userResponse.uid,
+        phone:phone?phone:null
       });
+
+      var profileInstance = await this._db.profile.create({
+        id: uuidv4(),
+        firstName: firstName,
+        lastName: lastName,
+        UserId: userInstance.id,
+        gender: gender?gender:null,
+        age: age?age:null,
+      }); 
+      return {'user':userInstance, 'profile':profileInstance} 
     } catch (error) {
       throw {
         status: 403,
-        message: error.errorInfo ? error.errorInfo.message : err.message,
+        message: error.errorInfo ? error.errorInfo.message : error.message,
       };
     }
   };
