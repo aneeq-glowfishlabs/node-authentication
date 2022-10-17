@@ -22,6 +22,11 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING(16),
       allowNull: true,
     },
+    role: {
+      type: Sequelize.STRING(20),
+      allowNull: false,
+      default: "user",
+    },
   });
   return User;
 };

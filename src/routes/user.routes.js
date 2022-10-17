@@ -11,7 +11,7 @@ const UserValidator = require("../validators/UserValidator");
 const userValidator = new UserValidator();
 const validate = require("../middlewares/validate.middleware");
 const authorize = require("../middlewares/authorize.middleware");
-
+const permission = require("../middlewares/permission.middleware");
 /**
  *  @swagger
  *  tags:
@@ -46,7 +46,7 @@ const authorize = require("../middlewares/authorize.middleware");
  */
 routes.get(
   "/profile",
-  authorize(),
+  [authorize(),permission('readOwn', 'profile')],
   userController.getProfile
 );
 
@@ -92,7 +92,7 @@ routes.get(
  */
  routes.post(
   "/profile",
-  [authorize(),validate(userValidator.updateProfileSchema)],
+  [authorize(),validate(userValidator.updateProfileSchema),permission('updateOwn', 'profile')],
   userController.updateProfile
 );
 
